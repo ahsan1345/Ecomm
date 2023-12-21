@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Khalid" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Customize your dark theme here. -->
+         <item name="colorPrimary">@color/myTheme</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/myThemelight</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/myTheme</item>
+    </style>
+</resources>

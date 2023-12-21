@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215014942192",
+    "project_id": "ahsan-86ad9",
+    "storage_bucket": "ahsan-86ad9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215014942192:android:6fb52027b2e1fbb4a56935",
+        "android_client_info": {
+          "package_name": "com.example.khalid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBrDisGRh2hM0kIzCBipHTNNmUcu4AQ74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
