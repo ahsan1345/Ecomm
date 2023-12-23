@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.khalid.R;
+import com.example.khalid.Screens.Admin.AdminDashboardActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -193,6 +194,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                            if (rememberMe.isChecked()){
                                                editor.putString("loginStatus","true");
+                                               editor.putString("Userid" ,User.getUid());
+                                               editor.putString("role",role);
                                                editor.commit();
                                            }else {
                                                editor.putString("loginStatus","false");
@@ -200,12 +203,23 @@ public class LoginActivity extends AppCompatActivity {
                                            }
 
 
+
                                            new Handler().postDelayed(new Runnable() {
                                                @Override
                                                public void run() {
                                                    alertdialog.dismiss();
-                                                   startActivity(new Intent( LoginActivity.this, DashboardActivity.class));
-                                                   finish();
+                                                   if(role.equals("User")){
+
+                                                       startActivity(new Intent( LoginActivity.this, DashboardActivity.class));
+                                                       finish();
+                                                   }  else if(role.equals("admin")){
+
+                                                       startActivity(new Intent( LoginActivity.this, AdminDashboardActivity.class));
+                                                       finish();
+
+                                                   }
+
+
                                                }
                                            }, 2000);
 
