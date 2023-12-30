@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.khalid.R;
 import com.example.khalid.Screens.Admin.AdminDashboardActivity;
@@ -30,6 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     String Userid;
 
+    TextView roleTextview, nameTextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +40,17 @@ public class DashboardActivity extends AppCompatActivity {
         preferences = getSharedPreferences( "myData",MODE_PRIVATE);
         editor = preferences.edit();
         logout = findViewById(R.id.logout);
+        roleTextview = findViewById(R.id.roleTextview);
+        nameTextview = findViewById(R.id.nameTextview);
+
         Userid = preferences.getString("Userid", null);
         db.child( "Users").child(Userid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     String roleCheck = snapshot.child( "role").getValue().toString().trim();
+                    roleTextview.setText(roleCheck);
+                    nameTextview.setText(snapshot.child( "name").getValue().toString().trim());
                     if(roleCheck.equals("admin")){
                         startActivity(new Intent(DashboardActivity.this, AdminDashboardActivity.class));
                         finish();
