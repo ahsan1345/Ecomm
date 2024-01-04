@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.khalid.R;
 import com.example.khalid.Screens.Admin.AdminDashboardActivity;
+import com.example.khalid.databinding.ActivityDashboardBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DashboardActivity extends AppCompatActivity {
 
 
-    ImageView logout;
+
     FirebaseAuth myAuth = FirebaseAuth.getInstance();
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -31,7 +32,10 @@ public class DashboardActivity extends AppCompatActivity {
 
     String Userid;
 
-    TextView roleTextview, nameTextview;
+
+     ActivityDashboardBinding binding;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +43,12 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         preferences = getSharedPreferences( "myData",MODE_PRIVATE);
         editor = preferences.edit();
-        logout = findViewById(R.id.logout);
-        roleTextview = findViewById(R.id.roleTextview);
-        nameTextview = findViewById(R.id.nameTextview);
+
+
+
+        binding = ActivityDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
 
         Userid = preferences.getString("Userid", null);
         db.child( "Users").child(Userid).addValueEventListener(new ValueEventListener() {
@@ -49,9 +56,9 @@ public class DashboardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     String roleCheck = snapshot.child( "role").getValue().toString().trim();
-                    roleTextview.setText(roleCheck);
-                    nameTextview.setText(snapshot.child( "name").getValue().toString().trim());
-                    if(roleCheck.equals("admin")){
+                    binding.roleTextview.setText(roleCheck);
+                    binding.nameTextview.setText(snapshot.child( "name").getValue().toString().trim());
+                    if(roleCheck.equals("Admin")){
                         startActivity(new Intent(DashboardActivity.this, AdminDashboardActivity.class));
                         finish();
                     }
@@ -64,7 +71,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myAuth.signOut();

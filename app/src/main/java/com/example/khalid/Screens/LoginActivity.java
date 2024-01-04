@@ -209,17 +209,12 @@ public class LoginActivity extends AppCompatActivity {
                                                public void run() {
                                                    alertdialog.dismiss();
                                                    if(role.equals("User")){
-
                                                        startActivity(new Intent( LoginActivity.this, DashboardActivity.class));
                                                        finish();
-                                                   }  else if(role.equals("admin")){
-
+                                                   }  else if(role.equals("Admin")){
                                                        startActivity(new Intent( LoginActivity.this, AdminDashboardActivity.class));
                                                        finish();
-
                                                    }
-
-
                                                }
                                            }, 2000);
 
