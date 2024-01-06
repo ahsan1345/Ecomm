@@ -106,7 +106,7 @@ public class DashboardActivity extends AppCompatActivity {
                 case "account":
                     replaceFragment(new AccountFragment());
                     break;
-                    
+
 
             }
             return true;
