@@ -94,7 +94,7 @@ public class DashboardActivity extends AppCompatActivity {
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             String title = item.getTitle().toString();
             switch (title){
-                case "Home":
+                case "home":
                     replaceFragment(new HomeFragment());
                     break;
                 case "cart":
@@ -106,8 +106,6 @@ public class DashboardActivity extends AppCompatActivity {
                 case "account":
                     replaceFragment(new AccountFragment());
                     break;
-
-
             }
             return true;
         });
