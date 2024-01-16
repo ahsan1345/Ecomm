@@ -64,8 +64,6 @@ public class DashboardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     String roleCheck = snapshot.child( "role").getValue().toString().trim();
-                    binding.roleTextview.setText(roleCheck);
-                    binding.nameTextview.setText(snapshot.child( "name").getValue().toString().trim());
                     if(roleCheck.equals("Admin")){
                         startActivity(new Intent(DashboardActivity.this, AdminDashboardActivity.class));
                         finish();
@@ -75,18 +73,6 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myAuth.signOut();
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                finish();
 
             }
         });
