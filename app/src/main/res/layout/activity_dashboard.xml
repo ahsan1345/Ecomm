@@ -8,78 +8,7 @@
 
     tools:context=".Screens.DashboardActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/logo"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ecomm"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="35sp"
-            android:textColor="@color/textcolor"
-            android:layout_weight="1"
-            android:translationX="-5dp"/>
-
-        <ImageView
-            android:id="@+id/logout"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/power"
-            android:layout_marginRight="10dp"
-            app:tint="@color/myTheme" />
-          <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="end"
-              android:layout_marginRight="10dp"
-              android:orientation="vertical">
-              <TextView
-                  android:id="@+id/roleTextview"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Role"
-                  android:textColor="#757575"
-                  android:fontFamily="@font/righteous_regular"
-                  android:textSize="12sp"/>
-
-              <TextView
-                  android:id="@+id/nameTextview"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Jhon"
-                 android:textColor="@color/textcolor"
-                 android:fontFamily="@font/poppins_bold"
-                  android:layout_marginTop="-5dp"
-                  android:textSize="15sp"/>
-
-
-    </LinearLayout>
-
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/logo"
-        app:civ_border_color="@color/myTheme"
-        app:civ_border_width="2dp"
-        android:layout_marginRight="10dp"
-        />
-
-
-
-
-</LinearLayout>
 
 
    <FrameLayout
