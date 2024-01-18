@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/product_cart_bg">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/testy" />
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_favorite_border_24"
+            android:layout_gravity="top|end"
+            android:layout_margin="20dp"
+
+             />
+
+    </FrameLayout>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Sansevieria Trifasci..."
+      android:fontFamily="@font/poppins_bold"
+      android:textColor="@color/textcolor"
+      android:textSize="18dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.5 \"
+            android:paddingHorizontal="8dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="14dp"
+            android:textColor="#616161"/>
+
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="23 Stock"
+           android:background="@drawable/product_stock_bg"
+           android:paddingVertical="5dp"
+           android:paddingHorizontal="10dp"
+           android:fontFamily="@font/poppins_semibold"
+           android:textSize="12dp"
+           android:textColor="@color/myTheme"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="$32"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/myTheme"
+        android:textSize="18dp"/>
+
+</LinearLayout>
