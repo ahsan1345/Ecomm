@@ -17,6 +17,7 @@ import com.example.khalid.R;
 import com.example.khalid.Screens.Admin.AdminDashboardActivity;
 import com.example.khalid.Screens.DashboardActivity;
 import com.example.khalid.Screens.LoginActivity;
+import com.example.khalid.Screens.ProductsActivity;
 import com.example.khalid.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -42,7 +43,6 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(getLayoutInflater(), container, false);
         preferences = getContext().getSharedPreferences( "myData",MODE_PRIVATE);
         editor = preferences.edit();
-
         Userid = preferences.getString("Userid", null);
         db.child( "Users").child(Userid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,6 +69,12 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), LoginActivity.class));
                 getActivity().finish();
 
+            }
+        });
+        binding.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ProductsActivity.class));
             }
         });
         return binding.getRoot();

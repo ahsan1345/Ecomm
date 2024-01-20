@@ -10,11 +10,11 @@
         android:layout_height="150dp"
         android:background="@drawable/product_cart_bg">
 
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/testy" />
-
 
         <ImageView
             android:layout_width="24dp"

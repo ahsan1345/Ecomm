@@ -79,42 +79,47 @@
                />
 
        </LinearLayout>
-
+<Button
+    android:id="@+id/btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/buttonshape"
+    android:text="add"/>
 
 <!--       Search Box-->
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:paddingHorizontal="20dp"
-           android:paddingVertical="10dp"
-           android:gravity="center"
-           android:layout_marginHorizontal="30dp"
-           android:layout_marginTop="10dp"
-           android:background="@drawable/search_bg">
+<!--       <LinearLayout-->
+<!--           android:layout_width="match_parent"-->
+<!--           android:layout_height="wrap_content"-->
+<!--           android:orientation="horizontal"-->
+<!--           android:paddingHorizontal="20dp"-->
+<!--           android:paddingVertical="10dp"-->
+<!--           android:gravity="center"-->
+<!--           android:layout_marginHorizontal="30dp"-->
+<!--           android:layout_marginTop="10dp"-->
+<!--           android:background="@drawable/search_bg">-->
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:drawableStart="@drawable/search"
-               android:text="Search"
-               android:gravity="center_vertical"
-               android:fontFamily="@font/poppins_bold"
-               android:textSize="16sp"
-               android:layout_weight="1"
-               android:textColor="#A39595"
-               android:paddingTop="5dp"
-               android:drawablePadding="10dp"
-               android:drawableTint="@color/textcolor"
-               />
-           <ImageView
-               android:layout_width="24dp"
-               android:layout_height="24dp"
-               android:src="@drawable/filter"
-               app:tint="@color/myTheme" />
+<!--           <TextView-->
+<!--               android:layout_width="wrap_content"-->
+<!--               android:layout_height="wrap_content"-->
+<!--               android:drawableStart="@drawable/search"-->
+<!--               android:text="Search"-->
+<!--               android:gravity="center_vertical"-->
+<!--               android:fontFamily="@font/poppins_bold"-->
+<!--               android:textSize="16sp"-->
+<!--               android:layout_weight="1"-->
+<!--               android:textColor="#A39595"-->
+<!--               android:paddingTop="5dp"-->
+<!--               android:drawablePadding="10dp"-->
+<!--               android:drawableTint="@color/textcolor"-->
+<!--               />-->
+<!--           <ImageView-->
+<!--               android:layout_width="24dp"-->
+<!--               android:layout_height="24dp"-->
+<!--               android:src="@drawable/filter"-->
+<!--               app:tint="@color/myTheme" />-->
 
 
-       </LinearLayout>
+<!--       </LinearLayout>-->
 
        </LinearLayout>
 
