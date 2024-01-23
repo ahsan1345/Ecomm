@@ -3,9 +3,14 @@ package com.example.khalid.Screens;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.khalid.R;
 import com.example.khalid.databinding.ActivityProductsBinding;
@@ -54,6 +59,21 @@ public class ProductsActivity extends AppCompatActivity {
 
             }
         });
+        binding.addProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog loaddialog = new Dialog(ProductsActivity.this);
+                loaddialog.setContentView(R.layout.dialog_add_product);
+                loaddialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                loaddialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                loaddialog.getWindow().setGravity(Gravity.CENTER);
+                loaddialog.setCancelable(false);
+                loaddialog.setCanceledOnTouchOutside(false);
+                loaddialog.show();
+
+            }
+        });
+
 
     }
 }
