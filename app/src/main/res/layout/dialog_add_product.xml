@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                    android:layout_centerVertical="true"
@@ -38,6 +39,7 @@
                     android:src="@drawable/logo"
                     />
                 <ImageButton
+                    android:id="@+id/imageAdd"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="end|bottom"
@@ -49,6 +51,7 @@
 
             </FrameLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                  android:hint="Enter name"
@@ -63,12 +66,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="30"
                     android:inputType="textPersonName"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Description"
@@ -83,12 +88,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pDescriptionEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="1000"
                     android:inputType="textPersonName"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter price"
@@ -103,6 +110,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pPriceEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="8"
@@ -110,6 +118,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pStock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Stock"
@@ -124,17 +133,45 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pStockEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="4"
                     android:inputType="textPersonName"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
-
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/myCart"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="-10dp">
+           <Button
+               android:id="@+id/cancelBtn"
+               android:layout_width="8dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_horizontal"
+               android:layout_margin="10dp"
+               android:layout_weight="1"
+               android:padding="10sp"
+               android:text="Cancel"
+               android:background="@drawable/buttonshape"
+               android:textColor="@color/white"
+               android:textSize="15sp"/>
+                <Button
+                    android:id="@+id/saveChangesBtn"
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:padding="10sp"
+                    android:textSize="15sp"
+                    android:text="Save Changes"
+                    android:textColor="@color/white"
+                    android:background="@drawable/buttonshape"/>
+            </LinearLayout>
 
         </LinearLayout>
 
