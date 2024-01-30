@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
@@ -35,6 +36,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+import java.util.regex.Pattern;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProductsActivity extends AppCompatActivity {
@@ -54,10 +57,10 @@ public class ProductsActivity extends AppCompatActivity {
     //Dialog Componets
     CircleImageView image;
     ImageButton imageAdd;
-
+    TextView imageErrTextview;
     TextInputLayout pName, pDescription, pPrice, pStock;
-    TextInputEditText pNameEditText,pDescriptionEditText,pPriceEditText,pStockEditText;
-    Button cancelBtn,saveChangesBtn;
+    TextInputEditText pNameEditText, pDescriptionEditText, pPriceEditText, pStockEditText;
+    Button cancelBtn, saveChangesBtn;
 
 
     @Override
@@ -108,6 +111,7 @@ public class ProductsActivity extends AppCompatActivity {
                 pDescriptionEditText = loaddialog.findViewById(R.id.pDescriptionEditText);
                 pPriceEditText = loaddialog.findViewById(R.id.pPriceEditText);
                 pStockEditText = loaddialog.findViewById(R.id.pStockEditText);
+                imageErrTextview = loaddialog.findViewById(R.id.imageErrTextview);
 
                 loaddialog.show();
 
@@ -126,22 +130,55 @@ public class ProductsActivity extends AppCompatActivity {
 
         });
 
-       // if (uploadTask != null && uploadTask.isInProgress()) {
+        // if (uploadTask != null && uploadTask.isInProgress()) {
 
-            //Toast.makeText(ProductsActivity.this, "Image upload in Process!!!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ProductsActivity.this, "Image upload in Process!!!", Toast.LENGTH_SHORT).show();
 
         //} else {
-          //  Validation("false");
+        //  Validation("false");
 
-       // }
+        // }
 
 
     }
-    public boolean PPriceValdation() {
+
+    public boolean pnameValidation() {
+
+        String name = pNameEditText.getText().toString().trim();
+        if (name.isEmpty()) {
+            pName.setError("Name is Required!!!");
+            return false;
+        } else if (!Pattern.compile("^[a-zA-Z\\s]*$").matcher(name).matches()) {
+            pName.setError("Name is only Text!!!");
+            return false;
+        } else {
+
+            pName.setError(null);
+            return true;
+        }
+
+
+    }
+
+    public boolean pdescValidation() {
+
+        String content = pDescriptionEditText.getText().toString().trim();
+        if (content.isEmpty()) {
+            pDescription.setError("Description is Required!!!");
+            return false;
+
+
+        } else {
+            pDescription.setError(null);
+            return true;
+        }
+    }
+
+    public boolean ppriceValidation() {
 
         String content = pPriceEditText.getText().toString().trim();
         if (content.isEmpty()) {
-            pPrice.setError("Price is requeied!!!");
+            pPrice.setError("Price is required!!!");
             return false;
 
 
@@ -160,7 +197,7 @@ public class ProductsActivity extends AppCompatActivity {
 
         String content = pStockEditText.getText().toString().trim();
         if (content.isEmpty()) {
-            pStock.setError("Stock is requeied!!!");
+            pStock.setError("Stock is required!!!");
             return false;
 
 
@@ -173,9 +210,10 @@ public class ProductsActivity extends AppCompatActivity {
             return true;
         }
     }
+
     public boolean imageValidation() {
         if (imageUri == null) {
-            imageErrTextview.setText("plant image is Requried!!!");
+            imageErrTextview.setText("plant image is Required!!!");
             imageErrTextview.setVisibility(View.VISIBLE);
             return false;
 
@@ -188,17 +226,19 @@ public class ProductsActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
-    protected Void ONActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+    protected void OnActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 420 && resultCode == RESULT_OK){
+        if (requestCode == 420 && resultCode == RESULT_OK) {
             imageUri = data.getData();
             image.setImageURI(imageUri);
         }
 
     }
-    private String getFileExtension(Uri uri){
+
+    private String getFileExtension(Uri uri) {
 
         ContentResolver or = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
@@ -206,18 +246,33 @@ public class ProductsActivity extends AppCompatActivity {
 
 
     }
-    private void validation(String imageStatus){
+
+    private void validation(String imageStatus) {
 
         boolean imageErr = false;
-        if (imageStatus.equals("true")){
+        if (imageStatus.equals("true")) {
 
             imageErr = imageValidation();
+        } else {
+            imageErr = imageValidation();
+
         }
-        
-    }
+        if ((pnameValidation() && pdescValidation() && ppriceValidation() && pstockValidation() && imageErr) == true) {
+            product();
 
+        }
 
     }
+     private void product(){
+
+        if(imageUri != null){
+
+          uploadTask = mStorage.child( "Images/"+System.currentTimeMillis()+"."+getFileExtension(imageUri)).putFile(imageUri).addOnSuccessListener()
+        }
+
+     }
+
+}
 
 
 
