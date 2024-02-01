@@ -5,17 +5,13 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khalid.R;
-import com.example.khalid.Screens.Admin.AdminDashboardActivity;
-import com.example.khalid.Screens.DashboardActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.example.khalid.Screens.LoginActivity;
 import com.example.khalid.Screens.ProductsActivity;
 import com.example.khalid.databinding.FragmentHomeBinding;

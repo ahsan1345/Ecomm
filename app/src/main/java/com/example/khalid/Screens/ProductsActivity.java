@@ -22,8 +22,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khalid.MainActivity;
 import com.example.khalid.R;
 import com.example.khalid.databinding.ActivityProductsBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +38,9 @@ import com.google.firebase.database.core.utilities.Validation;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -54,7 +59,8 @@ public class ProductsActivity extends AppCompatActivity {
     StorageReference mStorage;
     StorageTask uploadTask;
     Uri imageUri;
-    //Dialog Componets
+    //Dialog Componets;
+    Dialog loaddialog;
     CircleImageView image;
     ImageButton imageAdd;
     TextView imageErrTextview;
@@ -94,7 +100,7 @@ public class ProductsActivity extends AppCompatActivity {
         binding.addProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog loaddialog = new Dialog(ProductsActivity.this);
+                 loaddialog = new Dialog(ProductsActivity.this);
                 loaddialog.setContentView(R.layout.dialog_add_product);
                 loaddialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 loaddialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -112,7 +118,8 @@ public class ProductsActivity extends AppCompatActivity {
                 pPriceEditText = loaddialog.findViewById(R.id.pPriceEditText);
                 pStockEditText = loaddialog.findViewById(R.id.pStockEditText);
                 imageErrTextview = loaddialog.findViewById(R.id.imageErrTextview);
-
+                saveChangesBtn = loaddialog.findViewById(R.id.saveChangesBtn);
+                cancelBtn = loaddialog.findViewById(R.id.cancelBtn);
                 loaddialog.show();
 
             }
@@ -121,23 +128,31 @@ public class ProductsActivity extends AppCompatActivity {
         imageAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.addCategory(intent.CATEGORY_OPENABLE);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/*");
                 startActivityForResult(intent, 420);
             }
 
         });
+        saveChangesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // if (uploadTask != null && uploadTask.isInProgress()) {
+                if(uploadTask != null && uploadTask.isInProgress()){
+                    Toast.makeText(ProductsActivity.this, "Image Upload In Process!!!", Toast.LENGTH_SHORT).show();
+                } else {
+                   validation( "false");
+                }
 
-        //Toast.makeText(ProductsActivity.this, "Image upload in Process!!!", Toast.LENGTH_SHORT).show();
 
-        //} else {
-        //  Validation("false");
 
-        // }
+            }
+        });
+
+
+
+
 
 
     }
@@ -228,23 +243,18 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void OnActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 420 && resultCode == RESULT_OK) {
+        if(requestCode == 420 && resultCode == RESULT_OK){
             imageUri = data.getData();
             image.setImageURI(imageUri);
         }
-
     }
 
-    private String getFileExtension(Uri uri) {
-
-        ContentResolver or = getContentResolver();
+    private String getFileExtension(Uri uri){
+        ContentResolver cr = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(or.getType(uri));
-
-
+        return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
     }
 
     private void validation(String imageStatus) {
@@ -266,8 +276,28 @@ public class ProductsActivity extends AppCompatActivity {
      private void product(){
 
         if(imageUri != null){
-
-          uploadTask = mStorage.child( "Images/"+System.currentTimeMillis()+"."+getFileExtension(imageUri)).putFile(imageUri).addOnSuccessListener()
+          uploadTask = mStorage.child( "Images/"+System.currentTimeMillis()+"."+getFileExtension(imageUri)).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+              @Override
+              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                  Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                  task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                      @Override
+                      public void onSuccess(Uri uri) {
+                         String Photolink = uri.toString();
+                         String uploadId = db.child("Plant").push().getKey();
+                          HashMap<String, String> myData = new HashMap<String,String>();
+                          myData.put("pImage","" + Photolink);
+                          myData.put("pName", pNameEditText.getText().toString());
+                          myData.put("pDesc", pDescriptionEditText.getText().toString());
+                          myData.put("pStock", pStockEditText.getText().toString());
+                          myData.put("pPrice", pPriceEditText.getText().toString());
+                          myData.put("status", "1");
+                          db.child( "Products").child(uploadId).setValue(myData);
+                            loaddialog.dismiss();
+                      }
+                  });
+              }
+          });
         }
 
      }
