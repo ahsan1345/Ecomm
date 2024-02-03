@@ -12,10 +12,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -73,11 +76,14 @@ public class ProductsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = ActivityProductsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferences = getSharedPreferences("myData", MODE_PRIVATE);
         editor = preferences.edit();
         Userid = preferences.getString("Userid", null);
+        mStorage = FirebaseStorage.getInstance().getReference();
         db.child("Users").child(Userid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -122,37 +128,95 @@ public class ProductsActivity extends AppCompatActivity {
                 cancelBtn = loaddialog.findViewById(R.id.cancelBtn);
                 loaddialog.show();
 
+                imageAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        intent.setType("image/*");
+                        startActivityForResult(intent, 420);
+                    }
+
+                });
+                saveChangesBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(uploadTask != null && uploadTask.isInProgress()){
+                            Toast.makeText(ProductsActivity.this, "Image Upload In Process!!!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            validation( "false");
+                        }
+                    }
+                });
+
+
+                pNameEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        pnameValidation();
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                pDescriptionEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        pdescValidation();
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                pPriceEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        ppriceValidation();
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                pStockEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        pstockValidation();
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
             }
         });
-
-        imageAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-                startActivityForResult(intent, 420);
-            }
-
-        });
-        saveChangesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(uploadTask != null && uploadTask.isInProgress()){
-                    Toast.makeText(ProductsActivity.this, "Image Upload In Process!!!", Toast.LENGTH_SHORT).show();
-                } else {
-                   validation( "false");
-                }
-
-
-
-            }
-        });
-
-
-
-
 
 
     }
@@ -171,8 +235,6 @@ public class ProductsActivity extends AppCompatActivity {
             pName.setError(null);
             return true;
         }
-
-
     }
 
     public boolean pdescValidation() {
@@ -181,8 +243,6 @@ public class ProductsActivity extends AppCompatActivity {
         if (content.isEmpty()) {
             pDescription.setError("Description is Required!!!");
             return false;
-
-
         } else {
             pDescription.setError(null);
             return true;
@@ -195,12 +255,9 @@ public class ProductsActivity extends AppCompatActivity {
         if (content.isEmpty()) {
             pPrice.setError("Price is required!!!");
             return false;
-
-
         } else if (!Patterns.PHONE.matcher(content).matches()) {
             pStock.setError("Enter Valid number!!!");
             return false;
-
         } else {
             pPrice.setError(null);
             return true;
@@ -214,12 +271,6 @@ public class ProductsActivity extends AppCompatActivity {
         if (content.isEmpty()) {
             pStock.setError("Stock is required!!!");
             return false;
-
-
-        } else if (!Patterns.PHONE.matcher(content).matches()) {
-            pStock.setError("Enter only number!!!");
-            return false;
-
         } else {
             pStock.setError(null);
             return true;
@@ -231,15 +282,11 @@ public class ProductsActivity extends AppCompatActivity {
             imageErrTextview.setText("plant image is Required!!!");
             imageErrTextview.setVisibility(View.VISIBLE);
             return false;
-
         } else {
-
             imageErrTextview.setText("");
             imageErrTextview.setVisibility(View.GONE);
-
             return true;
         }
-
     }
 
     @Override
@@ -259,22 +306,22 @@ public class ProductsActivity extends AppCompatActivity {
 
     private void validation(String imageStatus) {
 
-        boolean imageErr = false;
+        boolean nameErr = false, descErr = false, priceErr = false, stockErr = false, imageErr = false;
+        nameErr = pnameValidation();
+        descErr = pdescValidation();
+        priceErr = ppriceValidation();
+        stockErr = pstockValidation();
         if (imageStatus.equals("true")) {
-
-            imageErr = imageValidation();
+            imageErr = true;
         } else {
             imageErr = imageValidation();
-
         }
-        if ((pnameValidation() && pdescValidation() && ppriceValidation() && pstockValidation() && imageErr) == true) {
+        if ((nameErr && descErr && priceErr && stockErr && imageErr) == true) {
             product();
-
         }
 
     }
      private void product(){
-
         if(imageUri != null){
           uploadTask = mStorage.child( "Images/"+System.currentTimeMillis()+"."+getFileExtension(imageUri)).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
               @Override
