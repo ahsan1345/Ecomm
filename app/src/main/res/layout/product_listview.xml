@@ -24,6 +24,32 @@
             android:layout_margin="20dp"
 
              />
+        <LinearLayout
+            android:id="@+id/options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom|right"
+            android:alpha="0.6"
+            android:layout_margin="15dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/editBtn"
+                android:layout_width="20dp"
+                android:layout_height="22dp"
+                android:src="@drawable/edit"
+                app:tint="#416AE4"
+                android:layout_marginBottom="5dp"/>
+
+            <ImageView
+                android:id="@+id/deleteBtn"
+                android:layout_width="20dp"
+                android:layout_height="22dp"
+                android:src="@drawable/delete"
+                app:tint="#E64747" />
+
+        </LinearLayout>
 
     </FrameLayout>
 

@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.khalid.MainActivity;
 import com.example.khalid.R;
+import com.example.khalid.Screens.Models.ProductModel;
 import com.example.khalid.databinding.ActivityProductsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -43,6 +44,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -62,6 +64,7 @@ public class ProductsActivity extends AppCompatActivity {
     StorageReference mStorage;
     StorageTask uploadTask;
     Uri imageUri;
+    ArrayList<ProductModel> datalist = new ArrayList<>();
     //Dialog Componets;
     Dialog loaddialog;
     CircleImageView image;
@@ -218,7 +221,23 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
 
+     db.child( "Products").addValueEventListener(new ValueEventListener() {
+         @Override
+         public void onDataChange(@NonNull DataSnapshot snapshot) {
+             if(snapshot.exists()){
+                 for (DataSnapshot ds: snapshot.getChildren()){
+                     ProductModel model = new ProductModel();
 
+                 }
+
+             }
+         }
+
+         @Override
+         public void onCancelled(@NonNull DatabaseError error) {
+
+         }
+     });
     }
 
     public boolean pnameValidation() {
