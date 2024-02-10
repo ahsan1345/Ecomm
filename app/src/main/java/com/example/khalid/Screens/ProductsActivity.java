@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -16,15 +17,20 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.khalid.MainActivity;
 import com.example.khalid.R;
 import com.example.khalid.Screens.Models.ProductModel;
@@ -225,11 +231,19 @@ public class ProductsActivity extends AppCompatActivity {
          @Override
          public void onDataChange(@NonNull DataSnapshot snapshot) {
              if(snapshot.exists()){
+                 datalist.clear();
                  for (DataSnapshot ds: snapshot.getChildren()){
-                     ProductModel model = new ProductModel();
-
+                     ProductModel model = new ProductModel(ds.getKey(),ds.child( "pName").getValue().toString(),
+                     ds.child( "pPrice").getValue().toString(),
+                     ds.child( "pStock").getValue().toString(),
+                     ds.child( "pImage").getValue().toString(),
+                             ds.child( "pDesc").getValue().toString(),
+                             ds.child( "status").getValue().toString()
+                     );
+                     datalist.add(model);
                  }
-
+                  MyAdapter adapter = new MyAdapter(ProductsActivity.this,datalist);
+                 binding.gridview.setAdapter(adapter);
              }
          }
 
@@ -367,7 +381,65 @@ public class ProductsActivity extends AppCompatActivity {
         }
 
      }
+  public class MyAdapter extends BaseAdapter{
+    Context context;
+    ArrayList<ProductModel> data;
 
+      public MyAdapter(Context context, ArrayList<ProductModel> data) {
+          this.context = context;
+          this.data = data;
+      }
+
+      @Override
+      public int getCount() {
+          // count of Adapter
+          return data.size();
+      }
+
+      @Override
+      public Object getItem(int position) {
+          return null;
+      }
+
+      @Override
+      public long getItemId(int position) {
+          return 0;
+      }
+
+      @Override
+      public View getView(int i, View view, ViewGroup viewGroup) {
+          // Declare Product Layout
+          View ProductItem = LayoutInflater.from(context).inflate(R.layout.product_listview, null);
+          ImageView pImage, wishlistBtn, editBtn, deleteBtn;
+          TextView pName, pRating, pStock, pPrice;
+          LinearLayout options, item;
+          pImage = ProductItem.findViewById(R.id.pImage);
+          wishlistBtn = ProductItem.findViewById(R.id.wishlistBtn);
+          editBtn = ProductItem.findViewById(R.id.editBtn);
+          deleteBtn = ProductItem.findViewById(R.id.deleteBtn);
+          pName = ProductItem.findViewById(R.id.pName);
+          pRating = ProductItem.findViewById(R.id.pRating);
+          pStock = ProductItem.findViewById(R.id.pStock);
+          pPrice = ProductItem.findViewById(R.id.pPrice);
+          options = ProductItem.findViewById(R.id.options);
+          iem = ProductItem.findViewById(R.id.item);
+
+          // if(!data.get(i).getpDiscount().equals("0")){
+          //pDiscount.setVisibility(View.VISIBLE);
+          //pDiscount.setText(data.get(i).getpDiscount()+"% OFF");
+          //} else {
+          //pPrice.setVisibility(View.GONE);
+          //}
+
+          pName.setText(data.get(i).getpName());
+          pStock.setText(data.get(i).getpStock()+" Stock");
+          pPrice.setText("$"+data.get(i).getpPrice());
+          Glide.with(context).load(data.get(i).getpImage()).into(pImage);
+
+          return ProductItem;
+
+      }
+  }
 }
 
 
