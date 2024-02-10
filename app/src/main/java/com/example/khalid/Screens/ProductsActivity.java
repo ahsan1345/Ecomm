@@ -422,7 +422,7 @@ public class ProductsActivity extends AppCompatActivity {
           pStock = ProductItem.findViewById(R.id.pStock);
           pPrice = ProductItem.findViewById(R.id.pPrice);
           options = ProductItem.findViewById(R.id.options);
-          iem = ProductItem.findViewById(R.id.item);
+          item = ProductItem.findViewById(R.id.item);
 
           // if(!data.get(i).getpDiscount().equals("0")){
           //pDiscount.setVisibility(View.VISIBLE);
