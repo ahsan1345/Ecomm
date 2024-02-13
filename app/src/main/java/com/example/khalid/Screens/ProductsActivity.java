@@ -236,8 +236,8 @@ public class ProductsActivity extends AppCompatActivity {
                      ProductModel model = new ProductModel(ds.getKey(),ds.child( "pName").getValue().toString(),
                      ds.child( "pPrice").getValue().toString(),
                      ds.child( "pStock").getValue().toString(),
-                     ds.child( "pImage").getValue().toString(),
                              ds.child( "pDesc").getValue().toString(),
+                             ds.child( "pImage").getValue().toString(),
                              ds.child( "status").getValue().toString()
                      );
                      datalist.add(model);
@@ -434,7 +434,22 @@ public class ProductsActivity extends AppCompatActivity {
           pName.setText(data.get(i).getpName());
           pStock.setText(data.get(i).getpStock()+" Stock");
           pPrice.setText("$"+data.get(i).getpPrice());
+          Toast.makeText(ProductsActivity.this, data.get(i).getpImage(), Toast.LENGTH_SHORT).show();
           Glide.with(context).load(data.get(i).getpImage()).into(pImage);
+
+         // double discount = Double.parseDouble(data.get(i).getpDiscount())/100;
+         // double calcDiscount = Double.parseDouble(data.get(i).getpPrice()) * discount;
+         // double totalPrice = Double.parseDouble(data.get(i).getpPrice()) - calcDiscount;
+         // pPrice.setText("$"+Math.round(totalPrice));
+
+          options.setVisibility(view.VISIBLE);
+
+          deleteBtn.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+
+              }
+          });
 
           return ProductItem;
 

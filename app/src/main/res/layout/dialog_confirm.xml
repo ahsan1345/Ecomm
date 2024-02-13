@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/myTheme"
+            android:text="Are you sure?"
+            android:fontFamily="@font/poppins_bold"
+            android:textAlignment="textStart"
+            android:textSize="20sp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginTop="10dp">
+
+              <Button
+                  android:id="@+id/cancelBtn"
+                  android:text="Cancel"
+                  android:layout_width="wrap_content"
+                  android:layout_weight="1"
+                  android:layout_margin="10dp"
+                  style="@style/EcommButtonSecondary"/>
+
+              <Button
+                  android:id="@+id/yesBtn"
+                  android:text="Yes"
+                  android:layout_width="wrap_content"
+                  android:layout_weight="1"
+                  android:layout_margin="10dp"
+                  style="@style/EcommButton"/>
+
+
+
+          </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
