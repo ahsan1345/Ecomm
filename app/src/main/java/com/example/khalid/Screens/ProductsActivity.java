@@ -156,6 +156,13 @@ public class ProductsActivity extends AppCompatActivity {
 
          }
      });
+      binding.search.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              startActivity(new Intent(ProductsActivity.this,SearchActivity.class));
+          }
+      });
+
     }
 
 //    Form Dialog

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Khalid"
         tools:targetApi="31">
         <activity
+            android:name=".Screens.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screens.ProductsActivity"
             android:exported="false" />
         <activity
