@@ -96,7 +96,7 @@
                 app:counterMaxLength="1000"
                 app:helperTextEnabled="true"
                 app:helperText="only Text Allowed"
-                app:startIconDrawable="@drawable/user"
+                app:startIconDrawable="@drawable/description"
                 app:startIconTint="@color/myTheme"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -104,8 +104,8 @@
                     android:id="@+id/pDescriptionEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="1000"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:maxLength="1000" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/pPrice"
@@ -118,7 +118,7 @@
                 app:counterMaxLength="8"
                 app:helperTextEnabled="true"
                 app:helperText="only Number Allowed"
-                app:startIconDrawable="@drawable/user"
+                app:startIconDrawable="@drawable/price"
                 app:startIconTint="@color/myTheme"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -141,7 +141,7 @@
                 app:counterMaxLength="4"
                 app:helperTextEnabled="true"
                 app:helperText="only Number Allowed"
-                app:startIconDrawable="@drawable/user"
+                app:startIconDrawable="@drawable/stock"
                 app:startIconTint="@color/myTheme"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 

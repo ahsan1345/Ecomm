@@ -44,7 +44,6 @@
             android:paddingHorizontal="15dp"
             android:paddingVertical="10dp"
             android:gravity="center"
-            android:padding="15dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="-10dp"
             android:layout_marginBottom="10dp"
@@ -54,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/search"
-                android:text="Search"
+                android:text="Search here"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/poppins_bold"
                 android:textSize="14sp"
@@ -84,6 +83,7 @@
             android:numColumns="2"
             android:paddingHorizontal="10dp"
             android:verticalSpacing="10dp"
+            android:visibility="gone"
             tools:listitem="@layout/product_listview" />
 
     </LinearLayout>
