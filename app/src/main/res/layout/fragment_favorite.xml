@@ -35,10 +35,6 @@
             android:layout_height="25dp"
             android:src="@drawable/search"/>
 
-
-
-
-
     </LinearLayout>
 
 </FrameLayout>
