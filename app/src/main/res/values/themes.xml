@@ -64,5 +64,7 @@
     <style name="borderRadiusTop">
         <item name="android:background">@drawable/borderadiustop</item>
     </style>
-
+    <style name="notFoundImage">
+        <item name="android:src">@drawable/not_found_frame</item>
+    </style>
 </resources>

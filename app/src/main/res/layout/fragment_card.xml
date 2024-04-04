@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Screens.Fragments.CartFragment"
+    tools:context=".Screens.Fragments.CardFragment"
     style="@style/screenBgTwo">
 
     <LinearLayout
@@ -24,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Cart"
-            android:fontFamily="@font/urbanist_bold"
+            android:fontFamily="@font/poppins_bold"
             android:textSize="28sp"
             android:translationX="-5dp"
             android:layout_weight="1"
@@ -49,12 +48,12 @@
         android:orientation="vertical"
         android:layout_marginHorizontal="20dp"
         android:gravity="center"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            style=""/>
+            style="@style/notFoundImage"/>
 
         <LinearLayout
             android:layout_width="match_parent"

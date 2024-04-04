@@ -18,4 +18,9 @@
         android:title="account"
         android:icon="@drawable/user"
         />
+    <item android:id="@+id/orders"
+        android:title="orders"
+        android:icon="@drawable/shopping_bag"
+        />
+
 </menu>
