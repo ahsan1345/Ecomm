@@ -19,6 +19,7 @@ import com.example.khalid.Screens.Fragments.AccountFragment;
 import com.example.khalid.Screens.Fragments.CardFragment;
 import com.example.khalid.Screens.Fragments.FavoriteFragment;
 import com.example.khalid.Screens.Fragments.HomeFragment;
+import com.example.khalid.Screens.Fragments.OrdersFragment;
 import com.example.khalid.databinding.ActivityDashboardBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,6 +84,9 @@ public class DashboardActivity extends AppCompatActivity {
                 case "home":
                     replaceFragment(new HomeFragment());
                     break;
+                case "orders" :
+                    replaceFragment(new OrdersFragment());
+                    break;
                 case "cart":
                     replaceFragment(new CardFragment());
                     break;
@@ -92,6 +96,7 @@ public class DashboardActivity extends AppCompatActivity {
                 case "account":
                     replaceFragment(new AccountFragment());
                     break;
+
             }
             return true;
         });

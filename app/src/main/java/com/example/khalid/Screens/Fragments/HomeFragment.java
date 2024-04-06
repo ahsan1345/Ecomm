@@ -56,17 +56,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myAuth.signOut();
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(getContext(), LoginActivity.class));
-                getActivity().finish();
-
-            }
-        });
         binding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
