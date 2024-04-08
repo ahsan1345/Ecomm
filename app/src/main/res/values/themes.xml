@@ -74,5 +74,26 @@
         <item name="textAllCaps">false</item>
         <item name="android:letterSpacing">0.0</item>
     </style>
+    <style name="screenBg">
+        <item name="android:background">#fff</item>
+    </style>
+    <style name="productBgColor">
+        <item name="android:backgroundTint">#F1F1F1</item>
+    </style>
+    <style name="productTitle">
+        <item name="android:textColor">#DFDFDF</item>
+    </style>
+    <style name="stockBg">
+        <item name="android:backgroundTint">@color/myThemelight</item>
+    </style>
+    <style name="bgQuantity">
+        <item name="android:backgroundTint">#F8F8F8</item>
+    </style>
+    <style name="btnQuantity">
+        <item name="android:tint">@color/myTheme</item>
+    </style>
+    <style name="textQuantity">
+        <item name="android:textColor">@color/myTheme</item>
+    </style>
 
 </resources>
