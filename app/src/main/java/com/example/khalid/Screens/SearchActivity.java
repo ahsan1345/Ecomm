@@ -222,7 +222,7 @@ public class SearchActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-//
+
 //            if (Userid != null && !Userid.equals("")) {
 //                try {
 //                    db.child("Wishlist").addListenerForSingleValueEvent(new ValueEventListener() {
